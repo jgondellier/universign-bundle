@@ -50,7 +50,7 @@ class PrevalidationRequestService
         ]);
         $this->transferTime = $transfertTime;
 
-        $response = $client->request('POST', $this->uri);
+        $response = $client->request('POST', $this->uri.'/prevalidate');
         $this->originalResult = json_decode($response->getBody()->getContents(), true);
         if (is_array($this->originalResult) && (array_key_exists('error_description',$this->originalResult))) {
             $errorResponse = new ErrorResponse();
