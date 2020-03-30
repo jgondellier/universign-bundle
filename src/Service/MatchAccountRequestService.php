@@ -2,7 +2,7 @@
 
 namespace Gondellier\UniversignBundle\Service;
 
-use Gondellier\UniversignBundle\Classes\Request\MatchAccount;
+use Gondellier\UniversignBundle\Classes\MatchAccount;
 use GuzzleHttp\Client;
 
 class MatchAccountRequestService

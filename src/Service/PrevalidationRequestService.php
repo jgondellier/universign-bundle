@@ -2,8 +2,8 @@
 
 namespace Gondellier\UniversignBundle\Service;
 
-use Gondellier\UniversignBundle\Classes\Request\PrevalidationRequest;
-use Gondellier\UniversignBundle\Classes\Request\ErrorResponse;
+use Gondellier\UniversignBundle\Classes\PrevalidationRequest;
+use Gondellier\UniversignBundle\Classes\ErrorResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\TransferStats;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;

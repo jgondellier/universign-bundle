@@ -2,7 +2,7 @@
 
 namespace Gondellier\UniversignBundle\Service;
 
-use Gondellier\UniversignBundle\Classes\Request\StandaloneRegistration;
+use Gondellier\UniversignBundle\Classes\StandaloneRegistration;
 use GuzzleHttp\Client;
 
 class StandaloneRegistrationRequestService{

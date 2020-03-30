@@ -2,7 +2,7 @@
 
 namespace Gondellier\UniversignBundle\Service;
 
-use Gondellier\UniversignBundle\Classes\Request\ValidationRequest;
+use Gondellier\UniversignBundle\Classes\ValidationRequest;
 use GuzzleHttp\Client;
 
 class ValidationRequestService{
