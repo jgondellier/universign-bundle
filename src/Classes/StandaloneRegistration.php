@@ -1,6 +1,6 @@
 <?php
 
-namespace Gondellier\UniversignBundle\Classes\Request;
+namespace Gondellier\UniversignBundle\Classes;
 
 class StandaloneRegistration extends Base
 {
