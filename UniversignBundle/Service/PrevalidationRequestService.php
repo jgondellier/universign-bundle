@@ -2,7 +2,7 @@
 
 namespace Gondellier\UniversignBundle\Service;
 
-use App\Gondellier\UniversignBundle\Classes\Request\PrevalidationRequest;
+use Gondellier\UniversignBundle\Classes\Request\PrevalidationRequest;
 use Gondellier\UniversignBundle\Classes\Request\ErrorResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\TransferStats;

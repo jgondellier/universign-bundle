@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Gondellier\UniversignBundle;
+namespace Gondellier\UniversignBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

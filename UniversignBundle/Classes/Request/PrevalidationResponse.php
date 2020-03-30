@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Gondellier\UniversignBundle\Classes\Request;
+namespace Gondellier\UniversignBundle\Classes\Request;
 
 
 class PrevalidationResponse
