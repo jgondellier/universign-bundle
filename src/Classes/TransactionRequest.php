@@ -158,6 +158,12 @@ class TransactionRequest extends Base
     public $failRedirection;
 
     /**
+     * A custom message added to the invitation email for signing for every signer.
+     * This field can be overridden in TransactionSigner for a specific signer.
+     */
+    public $invitationMessage;
+
+    /**
      * @param string $profile
      */
     public function setProfile(string $profile): void
@@ -358,6 +364,14 @@ class TransactionRequest extends Base
     public function setFailRedirection(array $failRedirection): void
     {
         $this->failRedirection = $failRedirection;
+    }
+
+    /**
+     * @param string $invitationMessage
+     */
+    public function setInvitationMessage(string $invitationMessage): void
+    {
+        $this->invitationMessage = $invitationMessage;
     }
 
 }

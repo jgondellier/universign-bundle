@@ -125,6 +125,11 @@ class TransactionSigner extends Base
     public $autoSendAgreements;
 
     /**
+     * A custom message added to the invitation email for signing for every signer.
+     */
+    public $invitationMessage;
+
+    /**
      * @return string
      */
     public function getFirstname():string
@@ -437,4 +442,11 @@ class TransactionSigner extends Base
         $this->autoSendAgreements = $autoSendAgreements;
     }
 
+    /**
+     * @param string $invitationMessage
+     */
+    public function setInvitationMessage(string $invitationMessage): void
+    {
+        $this->invitationMessage = $invitationMessage;
+    }
 }

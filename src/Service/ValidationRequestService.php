@@ -10,6 +10,7 @@ class ValidationRequestService{
     private $originalResult;
     private $result;
     private $reason;
+    private $reasonMessage;
     private $id;
     private $status;
     private $explanation;
@@ -42,6 +43,7 @@ class ValidationRequestService{
         if(empty($this->fault)){
             $this->result = $this->originalResult['result'];
             $this->reason = $this->originalResult['reason'];
+            $this->reasonMessage = $this->originalResult['reasonMessage'];
             $this->id = $this->originalResult['id'];
             $this->status = $this->originalResult['status'];
             $this->traitValidationResult();
@@ -65,6 +67,7 @@ class ValidationRequestService{
                 switch ($this->reason) {
                     case 4:
                         $this->explanation[]='Lecture impossible de la pièce. Mauvaise qualité ?';
+                        $this->explanation[]=$this->reasonMessage;
                         break;
                 }
                 if(is_array($this->result)){
