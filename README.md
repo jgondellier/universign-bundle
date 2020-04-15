@@ -15,12 +15,12 @@ $ composer require gondellier/universign-bundle
 
 #### Install using `composer.json`
 
-Add BehatHtmlFormatterPlugin to the list of dependencies inside your `composer.json`.
+Add universign-bundle to the list of dependencies inside your `composer.json`.
 
 ```json
 {
     "require": {
-        "gondellier/behat-html-formatter": "1.0.*"
+        "gondellier/universign-bundle": "1.0.*"
     }
 }
 ```
