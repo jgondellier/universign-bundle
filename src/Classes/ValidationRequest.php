@@ -4,9 +4,25 @@ namespace Gondellier\UniversignBundle\Classes;
 
 class ValidationRequest extends Base
 {
+    /**
+     * The ID documents.
+     */
     public $idDocument;
+    /**
+     * The Personal info to be compared with the ID document.
+     */
     public $personalInfo;
+    /**
+     * Whether to allow manual validation or not.
+     */
     public $allowManual;
+    /**
+     * The callback URL to be requested, once the validation session is completed (i.e. its status is VALID or INVALID).
+     * A GET request will be performed with following parameters appended to the URL:
+        id : Validation session identifier.
+        status : Validation session status. See ValidatorResult.
+        Example: http://www.company.com/vs?id=123-abc&status=1
+     */
     public $callbackURL;
 
     /**

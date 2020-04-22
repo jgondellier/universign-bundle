@@ -4,8 +4,17 @@ namespace Gondellier\UniversignBundle\Classes;
 
 class PersonalInfo extends Base
 {
+    /**
+     * The user’s first name. Only one first name must be provided.
+     */
     public $firstname;
+    /**
+     * The user’s last name.
+     */
     public $lastname;
+    /**
+     * The user’s birthdate.
+     */
     public $birthDate;
 
 

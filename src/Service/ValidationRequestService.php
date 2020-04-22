@@ -31,6 +31,11 @@ class ValidationRequestService{
         ]);
     }
 
+    /**
+     * Send Identity card to pre validate identity
+     *
+     * @param ValidationRequest $validationRequest
+     */
     public function validate(ValidationRequest $validationRequest): void
     {
         $response = $this->client->request('POST', $this->uri.'/ra/rpc/', [
@@ -41,14 +46,42 @@ class ValidationRequestService{
         $this->fault = $validationRequest->checkResponseFault($this->originalResult);
 
         if(empty($this->fault)){
-            $this->result = $this->originalResult['result'];
-            $this->reason = $this->originalResult['reason'];
-            $this->reasonMessage = $this->originalResult['reasonMessage'];
-            $this->id = $this->originalResult['id'];
-            $this->status = $this->originalResult['status'];
+            if(array_key_exists('result',$this->originalResult)){
+                $this->result = $this->originalResult['result'];
+            }
+            if(array_key_exists('reason',$this->originalResult)){
+                $this->result = $this->originalResult['reason'];
+            }
+            if(array_key_exists('reasonMessage',$this->originalResult)){
+                $this->result = $this->originalResult['reasonMessage'];
+            }
+            if(array_key_exists('id',$this->originalResult)){
+                $this->result = $this->originalResult['id'];
+            }
+            if(array_key_exists('status',$this->originalResult)){
+                $this->result = $this->originalResult['status'];
+            }
             $this->traitValidationResult();
         }
     }
+
+    /**
+     * Get information about identidity pre validate card
+     *
+     * @param string $id
+     */
+    public function getResult(string $id): void
+    {
+        $response = $this->client->request('POST', $this->uri.'/ra/rpc/', [
+            'body' => xmlrpc_encode_request('validator.getResult',$id)
+        ]);
+        $this->originalResult = xmlrpc_decode($response->getBody()->getContents());
+
+        if (is_array($this->originalResult) && xmlrpc_is_fault($this->originalResult)) {
+            $this->fault = $this->originalResult;
+        }
+    }
+
     /**
      * Permet d'interpréter la réponse qu'universign a fait.
      *
@@ -57,18 +90,20 @@ class ValidationRequestService{
     {
         switch ($this->status) {
             case 0:
-                $this->explanation[]='En cours';
+                $this->explanation['status']='pending validation';
                 break;
             case 1:
-                $this->explanation[]='Validé';
+                $this->explanation['status']='valid';
                 break;
             case 2:
-                $this->explanation[]='Refusé';
-                switch ($this->reason) {
-                    case 4:
+                $this->explanation['status']='invalid';
+                if($this->reasonMessage){
+                    if($this->reasonMessage==='MRZ_CHECKSUM_FAILURE'){
+                        $this->explanation[]='Lecture impossible de la pièce. La piste MRZ est illisible.';
+                    }else{
                         $this->explanation[]='Lecture impossible de la pièce. Mauvaise qualité ?';
                         $this->explanation[]=$this->reasonMessage;
-                        break;
+                    }
                 }
                 if(is_array($this->result)){
                     foreach ($this->result as $field => $result){
