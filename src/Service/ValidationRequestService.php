@@ -98,11 +98,34 @@ class ValidationRequestService{
             case 2:
                 $this->explanation['status']='invalid';
                 if($this->reasonMessage){
-                    if($this->reasonMessage==='MRZ_CHECKSUM_FAILURE'){
-                        $this->explanation[]='Lecture impossible de la pièce. La piste MRZ est illisible.';
-                    }else{
-                        $this->explanation[]='Lecture impossible de la pièce. Mauvaise qualité ?';
-                        $this->explanation[]=$this->reasonMessage;
+                    switch($this->reasonMessage){
+                        case 'AIDOS extraction for IDENTITY_CARD_FR: FAILURE: Client exception':
+                        case 'AIDOS extraction for PASSPORT_EU: FAILURE: Client exception':
+                        case 'TEXT_EXTRACTION_FAILURE':
+                        case 'Mauvais cadrage, problème de reflet ou luminosité, image floue':
+                            $this->explanation[]='Lecture impossible de la pièce. Impossible d\'extraire les informations.';
+                            break;
+                        case 'MRZ_CHECKSUM_FAILURE':
+                            $this->explanation[]='Lecture impossible de la pièce. La piste MRZ est illisible.';
+                        break;
+                        case '[opticalLine1 too short, opticalLine2 too short, notAfter too short]':
+                        case '[opticalLine1 too short, opticalLine2 too short]':
+                        case '[opticalLine2 too long, The check digit for the birth date field is incorrect]':
+                            $this->explanation[]='Le numéro d\'identification de la pièce n\'est pas valide.';
+                            break;
+                        case 'Wrong information':
+                        case 'Information différentes entre la carte et l\'enregistrement':
+                            $this->explanation[]='Les informations du client ne correspondent pas à ceux de la carte.';
+                            break;
+                        case '[card expired]':
+                        case 'La date est expirée / Ancien format':
+                            $this->explanation[]='La pièce d\'identité a expiré.';
+                            break;
+                        case 'La pièce donnée n\'est pas une pièce d\'identité':
+                            $this->explanation[]='Le type de carte ne correspond pas a celle fourni.';
+                            break;
+                        default:
+                            $this->explanation[]=$this->reasonMessage;
                     }
                 }
                 if(is_array($this->result)){
