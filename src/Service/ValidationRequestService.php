@@ -126,6 +126,7 @@ class ValidationRequestService{
                             break;
                         default:
                             $this->explanation[]=$this->reasonMessage;
+                            break;
                     }
                 }
                 if(is_array($this->result)){
