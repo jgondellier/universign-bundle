@@ -188,7 +188,8 @@ class MatchAccountRequestService
             return;
         }
         if($this->partialAccount && !$this->isCertified){
-            $this->explanation = 'Compte de niveau 1. Le nom ou le prenom ne correspond pas. Pas de problème pour signer en niveau 1.';
+            $this->explanation = 'Compte de niveau 1. Le nom ou le prenom ne correspond pas. Pas de problème pour signer en niveau 1.
+            Upload d\'une carte d\'identité pour signer en niveau2';
             return;
         }
         if(is_array($this->bestResult)){
